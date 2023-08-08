@@ -1,0 +1,19 @@
+services:
+  php:
+    image: thecodingmachine/php:8.1-v4-cli
+    container_name: php
+    environment:
+      - PHP_EXTENSION_MSGPACK=1
+      - PHP_EXTENSION_XDEBUG=1
+      - XDEBUG_MODE=debug
+    init: true
+    networks:
+      - async-console
+    restart: "no"
+    volumes:
+      - ./:/usr/src/app
+
+networks:
+  async-console:
+    driver: bridge
+    name: async-console
