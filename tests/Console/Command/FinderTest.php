@@ -6,8 +6,8 @@ namespace Nayleen\Async\Console\Command;
 
 use Amp\PHPUnit\AsyncTestCase;
 use Generator;
-use Nayleen\Finder\Engine\Engine;
-use Nayleen\Finder\Expectation\Expectation;
+use Nayleen\Finder\Engine;
+use Nayleen\Finder\Expectation;
 use Symfony\Component\Console\Command\Command;
 
 /**
@@ -31,7 +31,7 @@ final class FinderTest extends AsyncTestCase
     public function provideFinderCases(): Generator
     {
         $engineMock = new class() implements Engine {
-            public function find(Expectation $expectation): Generator
+            public function find(Expectation $expectation): iterable
             {
                 yield Command::class;
             }

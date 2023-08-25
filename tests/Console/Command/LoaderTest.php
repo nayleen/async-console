@@ -6,9 +6,8 @@ namespace Nayleen\Async\Console\Command;
 
 use Amp\PHPUnit\AsyncTestCase;
 use DI\Container;
-use Generator;
-use Nayleen\Finder\Engine\Engine;
-use Nayleen\Finder\Expectation\Expectation;
+use Nayleen\Finder\Engine;
+use Nayleen\Finder\Expectation;
 use Symfony\Component\Console\Command\ListCommand;
 use Symfony\Component\Console\Exception\CommandNotFoundException;
 
@@ -20,11 +19,29 @@ final class LoaderTest extends AsyncTestCase
     /**
      * @test
      */
+    public function can_list_names_of_loadable_commands(): void
+    {
+        $loader = new Loader(
+            new Finder(new class() implements Engine {
+                public function find(Expectation $expectation): iterable
+                {
+                    yield ListCommand::class;
+                }
+            }),
+            new Container(),
+        );
+
+        self::assertSame(['list'], $loader->getNames());
+    }
+
+    /**
+     * @test
+     */
     public function finds_command(): void
     {
         $loader = new Loader(
             new Finder(new class() implements Engine {
-                public function find(Expectation $expectation): Generator
+                public function find(Expectation $expectation): iterable
                 {
                     yield ListCommand::class;
                 }

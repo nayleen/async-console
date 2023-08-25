@@ -5,13 +5,15 @@ declare(strict_types = 1);
 namespace Nayleen\Async\Console;
 
 use DI;
+use Nayleen\Async\Bootstrapper;
 use Nayleen\Async\Component as BaseComponent;
+use Nayleen\Async\Component\HasDependencies;
 
-class Component extends BaseComponent
+class Component extends BaseComponent implements HasDependencies
 {
-    public function name(): string
+    public static function dependencies(): iterable
     {
-        return self::class;
+        yield Bootstrapper::class;
     }
 
     public function register(DI\ContainerBuilder $containerBuilder): void
