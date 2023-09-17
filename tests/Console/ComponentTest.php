@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Nayleen\Async\Console;
 
-
 use Amp\PHPUnit\AsyncTestCase;
 
 /**
@@ -12,8 +11,4 @@ use Amp\PHPUnit\AsyncTestCase;
  */
 final class ComponentTest extends AsyncTestCase
 {
-    /**
-     * @test
-     */
-    public function
 }
