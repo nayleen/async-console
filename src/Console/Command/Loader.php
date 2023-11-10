@@ -19,8 +19,7 @@ class Loader implements CommandLoaderInterface
     public function __construct(
         private readonly Finder $finder,
         private readonly Container $container,
-    ) {
-    }
+    ) {}
 
     private function find(): void
     {
