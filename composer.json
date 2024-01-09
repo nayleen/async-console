@@ -5,7 +5,7 @@
   "require": {
     "php": ">=8.1",
     "nayleen/async": "^0",
-    "nayleen/finder": "^0",
+    "nayleen/finder": "^1",
     "symfony/console": "^6 || ^7"
   },
   "require-dev": {
