@@ -4,8 +4,8 @@
   "license": "MIT",
   "require": {
     "php": ">=8.1",
-    "nayleen/async": "^0",
-    "nayleen/finder": "^0",
+    "nayleen/async": "@dev",
+    "nayleen/finder": "^1",
     "symfony/console": "^6 || ^7"
   },
   "require-dev": {
@@ -14,8 +14,6 @@
     "nayleen/development-dependencies": "^3.3",
     "roave/security-advisories": "dev-latest"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "Nayleen\\Async\\": "src/"
@@ -39,7 +37,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-main": "0.5.x-dev"
+      "dev-main": "0.6.x-dev"
     }
   }
 }
