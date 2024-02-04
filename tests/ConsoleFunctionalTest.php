@@ -24,9 +24,8 @@ final class ConsoleFunctionalTest extends AsyncTestCase
             input: new ArrayInput([]),
             output: $output = new BufferedOutput(),
         );
-        $console->kernel = TestKernel::create();
 
-        self::assertSame(0, $console->run());
+        self::assertSame(0, $console->execute(TestKernel::create()));
         self::assertStringContainsString('Available commands:', $output->fetch());
     }
 }

@@ -1,6 +1,6 @@
 services:
   php:
-    image: thecodingmachine/php:${PHP_VERSION:-8.1}-v4-cli
+    image: thecodingmachine/php:${PHP_VERSION:-8.3}-v4-cli
     container_name: async-console_php
     environment:
       - PHP_EXTENSION_XDEBUG=1

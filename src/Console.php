@@ -9,22 +9,21 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class Console extends App
+readonly class Console extends App
 {
     /**
      * @param non-empty-string|null $defaultCommand
      */
     public function __construct(
-        private readonly ?string $defaultCommand = null,
-        Tasks $tasks = new Tasks(),
-        private readonly ?InputInterface $input = null,
-        private readonly ?OutputInterface $output = null,
+        private ?string $defaultCommand = null,
+        private ?InputInterface $input = null,
+        private ?OutputInterface $output = null,
     ) {
         assert($this->defaultCommand !== '');
-        parent::__construct($tasks);
+        parent::__construct($this->runConsole(...), new Tasks());
     }
 
-    protected function execute(Kernel $kernel): int
+    protected function runConsole(Kernel $kernel): int
     {
         $console = $kernel->container()->get(Application::class);
         $console->setAutoExit(false);

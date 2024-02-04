@@ -23,11 +23,12 @@ final class ConsoleTest extends AsyncTestCase
         $consoleApplication = $this->createMock(Application::class);
         $consoleApplication->expects(self::once())->method('run');
 
+        $kernel = TestKernel::create()->withDependency(Application::class, $consoleApplication);
+
         $console = new Console(
             input: $this->createStub(InputInterface::class),
             output: $this->createStub(OutputInterface::class),
         );
-        $console->kernel = TestKernel::create()->withDependency(Application::class, $consoleApplication);
-        $console->run();
+        $console->execute($kernel);
     }
 }

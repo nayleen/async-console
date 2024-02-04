@@ -9,7 +9,7 @@ use Nayleen\Async\Bootstrapper;
 use Nayleen\Async\Component as BaseComponent;
 use Nayleen\Async\Component\HasDependencies;
 
-class Component extends BaseComponent implements HasDependencies
+readonly class Component extends BaseComponent implements HasDependencies
 {
     public static function dependencies(): iterable
     {
