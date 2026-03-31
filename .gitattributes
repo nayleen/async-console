@@ -1,0 +1,7 @@
+* text=auto
+*.php diff=php
+
+.gitattributes export-ignore
+tests/ export-ignore
+phpstan.neon.dist export-ignore
+phpunit.xml.dist export-ignore

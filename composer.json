@@ -1,0 +1,23 @@
+{
+    "name": "nayleen/async-console",
+    "description": "Asynchronous adapters for symfony/console",
+    "license": "MIT",
+    "type": "library",
+    "require": {
+        "php": ">=8.4",
+        "nayleen/async-core": "dev-main",
+        "symfony/console": "^8.0.8"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Nayleen\\Async\\Console\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1-dev"
+        }
+    }
+}
