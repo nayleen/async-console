@@ -18,7 +18,7 @@ use Tempest\Reflection\ClassReflector;
 /**
  * @internal
  *
- * @phpstan-type DiscoveryItem = array{name: non-empty-string, class: class-string, invokable: bool}
+ * @phpstan-type DiscoveryItem = array{names: list<non-empty-string>, class: class-string, invokable: bool}
  */
 final class CommandDiscovery implements Discovery
 {
@@ -36,21 +36,23 @@ final class CommandDiscovery implements Discovery
 
         foreach ($this->discoveryItems as $item) {
             /** @var DiscoveryItem $item */
-            ['name' => $name, 'class' => $class, 'invokable' => $invokable] = $item;
+            ['names' => $names, 'class' => $class, 'invokable' => $invokable] = $item;
 
-            $factories[$name] = static function () use ($container, $name, $class, $invokable) {
-                if ($invokable) {
-                    $code = $container->get($class);
-                    assert($code instanceof Closure);
+            foreach ($names as $name) {
+                $factories[$name] = static function () use ($container, $name, $class, $invokable) {
+                    if ($invokable) {
+                        $code = $container->get($class);
+                        assert($code instanceof Closure);
 
-                    return new Command($name, $code);
-                }
+                        return new Command($name, $code);
+                    }
 
-                $command = $container->get($class);
-                assert($command instanceof Command);
+                    $command = $container->get($class);
+                    assert($command instanceof Command);
 
-                return $command;
-            };
+                    return $command;
+                };
+            }
         }
 
         $this->console->setCommandLoader(new FactoryCommandLoader($factories));
@@ -66,7 +68,7 @@ final class CommandDiscovery implements Discovery
         assert($asCommandAttribute instanceof AsCommand);
 
         $this->discoveryItems->add($location, [
-            'name' => $asCommandAttribute->name,
+            'names' => explode('|', $asCommandAttribute->name),
             'class' => $class->getName(),
             'invokable' => !$class->getReflection()->isSubclassOf(Command::class),
         ]);
