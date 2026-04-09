@@ -38,11 +38,13 @@ final readonly class Console implements Application
 
     public function run(): int
     {
-        $exitCode = $this->kernel->run(static fn (
+        $future = $this->kernel->submit(static fn (
             SymfonyConsole $console,
             InputInterface $input,
             OutputInterface $output,
         ): int => $console->run($input, $output));
+
+        $exitCode = $future->await($this->kernel->cancellation());
 
         assert(is_int($exitCode));
 
