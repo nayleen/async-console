@@ -18,9 +18,24 @@ final class StreamOutput extends Output
         ?bool $decorated = null,
         ?OutputFormatterInterface $formatter = null,
     ) {
-        $decorated ??= hasColorSupport();
+        $decorated ??= $this->hasColorSupport();
 
         parent::__construct($verbosity, $decorated, $formatter);
+    }
+
+    private function hasColorSupport(): bool
+    {
+        // follow https://force-color.org/
+        if (($_ENV['FORCE_COLOR'] ?? $_SERVER['FORCE_COLOR'] ?? null) !== null) {
+            return true;
+        }
+
+        // follow https://no-color.org/
+        if (($_ENV['NO_COLOR'] ?? $_SERVER['NO_COLOR'] ?? null) !== null) {
+            return false;
+        }
+
+        return hasColorSupport();
     }
 
     protected function doWrite(string $message, bool $newline): void

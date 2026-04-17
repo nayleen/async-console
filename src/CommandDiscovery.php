@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Nayleen\Async\Console;
 
-use Closure;
 use DI;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -42,7 +41,7 @@ final class CommandDiscovery implements Discovery
                 $factories[$name] = static function () use ($container, $name, $class, $invokable) {
                     if ($invokable) {
                         $code = $container->get($class);
-                        assert($code instanceof Closure);
+                        assert(is_callable($code));
 
                         return new Command($name, $code);
                     }

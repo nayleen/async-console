@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace Nayleen\Async\Console;
 
-use Nayleen\Async\AbstractComponent;
+use Nayleen\Async\Component;
 use Nayleen\Async\DI\Loader;
 
-final readonly class ConsoleComponent extends AbstractComponent
+final readonly class ConsoleComponent extends Component
 {
     public function register(Loader $loader): void
     {
