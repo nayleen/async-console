@@ -18,13 +18,11 @@ final class Console extends Runtime
      */
     protected function setup(Options $context): Future
     {
-        $future = $this->kernel->submit(static fn (
+        // @phpstan-ignore-next-line return.type
+        return $this->kernel->submit(static fn (
             SymfonyConsole $console,
             InputInterface $input,
             OutputInterface $output,
         ): int => $console->run($input, $output));
-
-        /** @var Future<int> $future */
-        return $future;
     }
 }
